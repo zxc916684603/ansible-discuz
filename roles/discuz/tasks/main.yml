@@ -75,7 +75,7 @@
     template: src={{discuz_vhost_src}} dest={{discuz_vhost_dir}}
   - name: Change vhost.conf file1
   lineinfile:
-      dest: {{discuz_vhost_dir}}/{{discuz_vhost_src}}
+      dest: {{discuz_vhost_dir}}{{discuz_vhost_src}}
       regexp: "DocumentRoot "/data/wwwroot/www.example.com""
       line: "DocumentRoot "/data/wwwroot/public""
       backrefs: yes
