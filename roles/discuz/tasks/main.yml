@@ -59,7 +59,10 @@
   
 - name: Rename dir name
   shell: cd /data/wwwroot; if [ ! -d "{{discuz_name}}" ]; then mv *{{discuz_name}}* {{discuz_name}}; fi
-
+  
+- name: Copy discuzq config
+  template: src=config_default.php dest=/data/wwwroot/discuz/public/config/config_default.php
+  
 # 系统通用
 - name: Permission directory
   shell: find /data/wwwroot -type d -exec chmod 750 {} \;
@@ -71,7 +74,7 @@
 - block:
   - name: Copy Nginx or Aapche vhost configuration
     template: src={{discuz_vhost_src}} dest={{discuz_vhost_dir}}
-  
+    
   - name: change owner&group
     shell: chown -R {{discuz_owner}}:{{discuz_owner}} /data/wwwroot
     
